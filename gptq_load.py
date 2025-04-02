@@ -22,8 +22,7 @@ from gptqmodel.models.base import BaseGPTQModel
 from gptqmodel.models.auto import MODEL_MAP, SUPPORTED_MODELS
 from gptqmodel.models._const import CPU
 
-from datasets import load_dataset
-from qwen_omni_utils import process_mm_info
+f
 
 class Qwen25OmniThiknerGPTQ(BaseGPTQModel):
     loader = Qwen2_5OmniModel

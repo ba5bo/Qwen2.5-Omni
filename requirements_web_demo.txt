@@ -10,6 +10,12 @@ modelscope_studio==1.2.2
 git+https://github.com/huggingface/transformers@f742a644ca32e65758c3adb36225aef1731bd2a8
 accelerate
 av
+torchvision
+optimum
+auto-gptq
+wheel
+gptqmodel --no-build-isolation
+setuptools
 
 # Optional dependency
 # Uncomment the following line if you need flash-attn
