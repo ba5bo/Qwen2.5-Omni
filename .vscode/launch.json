@@ -10,7 +10,16 @@
             "request": "launch",
             "program": "web_demo.py",
             "console": "integratedTerminal",
-            "args": "--checkpoint-path ~/.ollama/models/modelscope/Qwen2.5-Omni-7B --server-name=0.0.0.0"  
+            "args": "--checkpoint-path ~/.ollama/models/modelscope/Qwen2.5-Omni-7B --server-name=0.0.0.0" 
+        },
+        {
+            "name": "Qwen2.5-Omni-7B-GPTQ-4bit",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "web_demo.py",
+            "console": "integratedTerminal",
+            "args": "--checkpoint-path ~/.ollama/models/modelscope/FunAGI/Qwen2.5-Omni-7B-GPTQ-4bit --server-name=0.0.0.0" ,
+            "justMyCode": false
         },
         {
             "name": "Python 调试程序: 当前文件",

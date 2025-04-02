@@ -1,6 +1,9 @@
 import io
 import os
 import ffmpeg
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 import numpy as np
 import gradio as gr
@@ -57,10 +60,10 @@ def _launch_demo(args, model, processor):
                 .output(output_file, acodec='aac', ar='16000', audio_bitrate='192k')
                 .run(quiet=True, overwrite_output=True)
             )
-            print(f"Conversion successful: {output_file}")
+            logging.info(f"Conversion successful: {output_file}")
         except ffmpeg.Error as e:
-            print("An error occurred during conversion.")
-            print(e.stderr.decode('utf-8'))
+            logging.info("An error occurred during conversion.")
+            logging.info(e.stderr.decode('utf-8'))
 
     def format_history(history: list, system_prompt: str):
         messages = []
@@ -103,14 +106,18 @@ def _launch_demo(args, model, processor):
         return messages
 
     def predict(messages, voice=DEFAULT_VOICE):
-        print('predict history: ', messages)    
+        logging.info('predict history: ', messages)    
 
         text = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
 
         audios, images, videos = process_mm_info(messages, True)
 
+        logging.info(f'start processer')
         inputs = processor(text=text, audios=audios, images=images, videos=videos, return_tensors="pt", padding=True)
         inputs = inputs.to(model.device).to(model.dtype)
+        logging.info(f'finish processer')
+
+
 
         text_ids, audio = model.generate(**inputs, spk=voice, use_audio_in_video=True)
 
